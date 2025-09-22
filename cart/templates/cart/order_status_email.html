@@ -1,0 +1,52 @@
+{% load cart_extras %}
+
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body { font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px; }
+    .logo { font-size: 24px; font-weight: bold; color: #2c3e50; margin-bottom: 10px; }
+    .table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    .table th, .table td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    .table th { background-color: #eee; }
+    .footer { margin-top: 30px; font-size: 12px; color: #888; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="logo">🐾 Зоомагазин</div>
+  <p>Здравствуйте, {{ order.name }}!</p>
+  <p>Статус вашего заказа №{{ order.id }} был обновлён: <strong>{{ status }}</strong></p>
+
+  <h3>Состав заказа:</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Товар</th>
+        <th>Кол-во</th>
+        <th>Цена</th>
+        <th>Сумма</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in order.orderitem_set.all %}
+      <tr>
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.price }} гр</td>
+        <td>{{ item.quantity|multiply:item.price }} гр</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h3>Итого: {{ order.orderitem_set.all|calc_total }} гр</h3>
+
+  <p>Мы сообщим вам, когда заказ будет доставлен. Спасибо за покупку!</p>
+
+  <div class="footer">
+    &copy; {{ year }} Зоомагазин. Все права защищены.
+  </div>
+</body>
+</html>

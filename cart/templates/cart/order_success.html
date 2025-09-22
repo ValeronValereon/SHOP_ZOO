@@ -1,0 +1,8 @@
+{% extends 'shop_zoo/base.html' %}
+
+{% block title %}Заказ оформлен{% endblock %}
+
+{% block content %}
+  <h2>Спасибо за заказ!</h2>
+  <p>Мы свяжемся с вами по адресу: {{ order.email }}</p>
+{% endblock %}

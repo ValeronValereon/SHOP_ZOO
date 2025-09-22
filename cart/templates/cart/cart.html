@@ -1,0 +1,57 @@
+{% extends 'shop_zoo/base.html' %}
+
+
+{% block title %}Корзина{% endblock %}
+
+{% block content %}
+  <div class="container py-4">
+    <h1>🛒 Ваша корзина</h1>
+    {% if items %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Товар</th>
+            <th>Количество</th>
+            <th>Сумма</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in items %}
+          <tr>
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.get_total_price }} гр</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <h4 class="text-end">Итого: {{ total }} гр</h4>
+      <a href="{% url 'checkout' %}" class="btn btn-primary">Оформить заказ</a>
+
+      <div class="text-end mt-4">
+        <a href="{% url 'clear_cart' %}" class="btn btn-danger"
+           onclick="return confirm('Вы уверены, что хотите очистить корзину?');">
+           Очистить корзину
+        </a>
+      </div>
+    {% else %}
+      <p>Корзина пуста</p>
+    {% endif %}
+  </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

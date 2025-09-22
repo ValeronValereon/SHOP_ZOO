@@ -1,0 +1,37 @@
+{% extends 'shop_zoo/base.html' %}
+
+{% block title %}Все товары{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <h1 class="text-center mb-5">🐾 Витрина товаров</h1>
+
+  {% if products %}
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for product in products %}
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        {% if product.image %}
+        <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+        {% else %}
+        <img src="https://via.placeholder.com/300x200?text=Нет+фото" class="card-img-top" alt="Нет фото">
+        {% endif %}
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text">{{ product.description|default:"Нет описания" }}</p>
+          <p class="text-muted">Категория: {{ product.category.name }}</p>
+          <p class="fw-bold">Цена: {{ product.price }} гр</p>
+        </div>
+        <div class="card-footer text-center">
+          <a href="{% url 'single_product' product.id %}" class="btn btn-outline-primary">Подробнее</a>
+          <a href="{% url 'add_to_cart' product.id %}" class="btn btn-success ms-2">Купить</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="text-center">Нет доступных товаров</p>
+  {% endif %}
+</div>
+{% endblock %}

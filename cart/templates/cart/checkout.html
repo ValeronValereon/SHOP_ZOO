@@ -1,0 +1,12 @@
+{% extends 'shop_zoo/base.html' %}
+
+{% block title %}Оформление заказа{% endblock %}
+
+{% block content %}
+  <h2>Оформление заказа</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Подтвердить заказ</button>
+  </form>
+{% endblock %}

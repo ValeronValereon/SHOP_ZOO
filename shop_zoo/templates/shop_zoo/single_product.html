@@ -1,0 +1,16 @@
+{% extends 'shop_zoo/base.html' %}
+
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+  <div class="container py-4">
+    <h1>{{ product.name }}</h1>
+    <h5 class="text-muted">Категория: {{ product.category.name }}</h5>
+    <p><strong>Цена:</strong> {{ product.price }} гр</p>
+    <p><strong>Производитель:</strong> {{ product.brand }}</p>
+    <p><strong>Остаток на складе:</strong> {{ product.stock }}</p>
+    <a href="{% url 'add_to_cart' product.id %}" class="btn btn-success">Купить</a>
+
+  </div>
+{% endblock %}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body { font-family: Arial, sans-serif; }
+    .logo { font-size: 24px; font-weight: bold; color: #2c3e50; }
+    .table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    .table th, .table td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    .footer { margin-top: 30px; font-size: 12px; color: #888; }
+  </style>
+</head>
+<body>
+  <div class="logo">🐾 Зоомагазин</div>
+  <p>Новый заказ от <strong>{{ order.name }}</strong></p>
+  <p>Email: {{ order.email }}<br>Адрес: {{ order.address }}</p>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Товар</th>
+        <th>Кол-во</th>
+        <th>Сумма</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in items %}
+      <tr>
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.get_total_price }} гр</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h3>Итого: {{ total }} гр</h3>
+
+  <div class="footer">
+    &copy; {{ year }} Зоомагазин. Все права защищены.
+  </div>
+</body>
+</html>
